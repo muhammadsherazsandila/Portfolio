@@ -54,7 +54,7 @@ function Hero() {
                         initial="hidden"
                         whileInView="visible"
                         className=' flex gap-6 items-center font-bold'>
-                        <a href='https://fiverr.com/s/DB9pbNa' target='blank' className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-[#00a3e7] text-black hover:bg-transparent hover:text-[#00a3e7] hover:border-[1px] hover:border-[#00a3e7] transition-all duration-300 relative`}>Hire me</a>
+                        <a href='https://www.fiverr.com/muhammasdsheraz/' target='blank' className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-[#00a3e7] text-black hover:bg-transparent hover:text-[#00a3e7] hover:border-[1px] hover:border-[#00a3e7] transition-all duration-300 relative`}>Hire me</a>
                         <a href='https://wa.me/+923260468787' target='blank' className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-transparent text-[#00a3e7] relative ${styles.button1} z-10`}>Let's Talk</a>
                     </motion.div>
                     <motion.div
