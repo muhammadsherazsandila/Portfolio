@@ -17,7 +17,7 @@ function Summary() {
                 whileInView="visible"
                 className=' py-8 flex justify-evenly items-center flex-wrap md:mt-28 sm:mt-28 lg:mt-28 gap-5'>
                 <div className={`flex flex-row sm:flex-col md:flex-col lg:flex-col xl:flex-col 2xl:flex-col gap-2 font-bold text-2xl text-white items-center italic ${styles.textShadow}`}>
-                    <h1 className=' text-4xl'>+4</h1>
+                    <h1 className=' text-4xl'>+5</h1>
                     <h1>Completed Projects</h1>
                 </div>
                 <div className={`flex flex-row sm:flex-col md:flex-col lg:flex-col xl:flex-col 2xl:flex-col gap-2 font-bold text-2xl text-white items-center italic ${styles.textShadow}`}>
