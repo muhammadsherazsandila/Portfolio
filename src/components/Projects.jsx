@@ -14,6 +14,7 @@ function Projects() {
         { imgUrl: "/Images/sandilaDigix.png", siteUrl: "https://sandiladigix.netlify.app/" },
         { imgUrl: "/Images/futureProgrammers.png", siteUrl: "https://future-programmers.vercel.app/" },
         { imgUrl: "/Images/unitConverter.png", siteUrl: "https://units-converter-react.vercel.app/" },
+        { imgUrl: "/Images/chatbot.png", siteUrl: "https://mscopilot.netlify.app/" },
     ];
 
     return (
