@@ -55,29 +55,25 @@
     height: 100%;
     background-color: #00a3e7;
 }
-
-.swiperContainer :global(.swiper-button-next),
-.swiperContainer :global(.swiper-button-prev) {
-    color: #00a3e7 !important;
-    border-radius: 50% !important;
-    transition: all !important;
-    filter: drop-shadow(0px 0px 5px #00a3e7) !important;
-    background-color: transparent !important;
-    transition-duration: 0.5s !important;
-}
-
-.swiperContainer :global(.swiper-button-next:hover),
-.swiperContainer :global(.swiper-button-prev:hover) {
-    color: #00a3e7 !important;
-    transform: scale(1.2);
-}
-
-.swiperContainer :global(.swiper-button-next::after),
-.swiperContainer :global(.swiper-button-prev::after) {
-    font-size: 30px !important;
-    font-weight: bolder;
+.swiperContainer {
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
 }
 
 .textShadow {
-    filter: drop-shadow(0px 0px 10px #00a3e7);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Add to your global CSS */
+.dark {
+  --tw-bg-opacity: 1;
+  background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  color: white;
+}
+
+.dark body {
+  background-color: #111827;
 }

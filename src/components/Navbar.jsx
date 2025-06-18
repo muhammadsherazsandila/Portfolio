@@ -1,99 +1,230 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
-import { FaArrowUp } from "react-icons/fa";
-import styles from './Button.module.css';
-import { motion } from "framer-motion";
+import { FaArrowUp, FaMoon, FaSun } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
-import { translater, translaterNav, translaterUpDown } from './Animation';
+import { translaterUpDown } from "./Animation";
 
 function Navbar() {
-    const [activeLink, setActiveLink] = useState(0);
-    const [show, setShow] = useState(true)
-    const handleClick = (index) => {
-        setActiveLink(index);
-        setShow(true)
-        document.body.style.overflow = "auto"
+  const [activeLink, setActiveLink] = useState(0);
+  const [showMenu, setShowMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const navElements = [
+    { name: "Home" },
+    { name: "About" },
+    { name: "Skills" },
+    { name: "Projects" },
+    { name: "Summary" },
+  ];
+
+  const handleClick = (index) => {
+    setActiveLink(index);
+    setShowMenu(false);
+    document.body.style.overflow = "auto";
+  };
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
 
-    let navElementsArr = [
-        { name: "Home", delay: 0.1, tranlateLength: 10, tranlateLengthNegative: -10 },
-        { name: "About", delay: 0.2, tranlateLength: 20, tranlateLengthNegative: -20 },
-        { name: "Skills", delay: 0.3, tranlateLength: 30, tranlateLengthNegative: -30 },
-        { name: "Projects", delay: 0.4, tranlateLength: 40, tranlateLengthNegative: -40 },
-    ]
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return (
-        <>
-            <nav className=' relative flex justify-between px-6 md:px-12 lg:px-24 items-center w-full py-4 md:py-6 bg-transparent' id='nav'>
-                <motion.h1
-                    variants={translater(-100)}
-                    initial="hidden"
-                    whileInView="visible"
-                    className='font-bold text-xl md:text-2xl'><span className=' text-[#00a3e7]'>MS </span> Developer</motion.h1>
-                <ul className='hidden md:flex gap-4 md:gap-6 items-center lg:flex'>
-                    {navElementsArr.map((item, index) => (
-                        <motion.li
-                            key={index}
-                            variants={translaterUpDown(item.delay, item.tranlateLengthNegative, 0.6)}
-                            initial="hidden"
-                            whileInView="visible"
-                            className='font-bold cursor-pointer'>
-                            <Link
-                                onClick={() => handleClick(index)}
-                                className={`${activeLink === index ? styles.selected : ""} ${styles.navlink}`}
-                                to={(item.name).toLowerCase()}
-                                duration={700}
-                                smooth={true}>
-                                {item.name}
-                            </Link>
-                        </motion.li>
-                    ))}
-                </ul>
-                <motion.button
-                    variants={translater(50)}
-                    initial="hidden"
-                    animate="visible"
-                    className={`text-2xl text-white mr-1 sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden ${show ? "scale-100" : "scale-0"} transition-all duration-500`}
-                    onClick={() => { setShow(false); document.body.style.overflow = "hidden" }}
-                >
-                    < GiHamburgerMenu />
-                </motion.button>
+  // Toggle dark mode
 
-                <ul className={`${show ? "-right-28" : "-right-0"} sm:hidden lg:hidden md:hidden xl:hidden 2xl:hidden absolute px-4 py-7 top-0 flex gap-4 flex-col items-center bottom-0 h-lvh bg-gray-900 z-30 shadow-[0px_0px_5px_1px_#00a3e7] transition-all duration-500 `}>
-                    <span
-                        onClick={() => { setShow(true); document.body.style.overflow = "auto" }}
-                    >< ImCross /></span>
-                    {navElementsArr.map((item, index) => (
-                        <motion.li
-                            key={index}
-                            variants={translaterNav(item.delay, item.tranlateLength, 0.6)}
-                            initial="hidden"
-                            whileInView="visible"
-                            className='font-bold cursor-pointer'>
-                            <Link
-                                onClick={() => handleClick(index)}
-                                className={`${activeLink === index ? styles.selected : ""} ${styles.navlink}`}
-                                to={(item.name).toLowerCase()}
-                                duration={700}
-                                smooth={true}>
-                                {item.name}
-                            </Link>
-                        </motion.li>
-                    ))}
-                </ul>
-            </nav>
-            <span>
+  // Mobile menu animation variants
+  const mobileMenuVariants = {
+    hidden: { x: "100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 20,
+        stiffness: 300,
+      },
+    },
+    exit: {
+      x: "100%",
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  return (
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? "dark:bg-gray-900/90 bg-white/90 backdrop-blur-md shadow-md py-2"
+            : "dark:bg-transparent bg-transparent py-4"
+        }`}
+        id="nav"
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex justify-between items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="font-bold text-xl md:text-2xl"
+          >
+            <span className="text-cyan-500">MS </span>
+            <span className="dark:text-white text-gray-900">Developer</span>
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-6">
+            {navElements.map((item, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+                className="relative"
+              >
                 <Link
-                    onClick={() => setActiveLink(0)}
-                    to='nav'
-                    duration={700}
-                    smooth={true}
-                    className="text-2xl md:text-3xl p-2 md:p-3 bg-[#00a3e7] text-black fixed right-6 md:right-10 bottom-6 md:bottom-10 rounded-full cursor-pointer shadow-[0px_0px_10px_2px_#00a3e7] hover:shadow-[0px_0px_10px_3px_#00a3e7] hover:scale-110 transition-all duration-500 animate-bounce z-50">
-                    <FaArrowUp />
-                </Link></span>
-        </>
-    );
+                  onClick={() => handleClick(index)}
+                  className={`cursor-pointer text-lg font-medium transition-colors ${
+                    activeLink === index
+                      ? "text-cyan-500"
+                      : "dark:text-gray-300 text-gray-700 hover:text-cyan-400"
+                  }`}
+                  to={item.name.toLowerCase()}
+                  duration={700}
+                  smooth={true}
+                  spy={true}
+                >
+                  {item.name}
+                  {activeLink === index && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-500"
+                      layoutId="navIndicator"
+                    />
+                  )}
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="md:hidden text-2xl dark:text-white text-gray-900 p-2"
+            onClick={() => {
+              setShowMenu(true);
+              document.body.style.overflow = "hidden";
+            }}
+            aria-label="Open menu"
+          >
+            <GiHamburgerMenu />
+          </motion.button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {showMenu && (
+          <motion.div
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-50 md:hidden"
+          >
+            <div
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => {
+                setShowMenu(false);
+                document.body.style.overflow = "auto";
+              }}
+            />
+
+            <motion.div className="absolute right-0 top-0 bottom-0 w-4/5 max-w-sm dark:bg-gray-900 bg-white shadow-xl">
+              <div className="p-6 flex justify-end">
+                <button
+                  className="text-2xl dark:text-white text-gray-900 p-2"
+                  onClick={() => {
+                    setShowMenu(false);
+                    document.body.style.overflow = "auto";
+                  }}
+                  aria-label="Close menu"
+                >
+                  <ImCross />
+                </button>
+              </div>
+
+              <ul className="flex flex-col gap-8 p-8">
+                {navElements.map((item, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ x: 30, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="relative"
+                  >
+                    <Link
+                      onClick={() => handleClick(index)}
+                      className={`block text-2xl font-medium py-2 transition-colors ${
+                        activeLink === index
+                          ? "text-cyan-500"
+                          : "dark:text-gray-300 text-gray-700 hover:text-cyan-400"
+                      }`}
+                      to={item.name.toLowerCase()}
+                      duration={700}
+                      smooth={true}
+                    >
+                      {item.name}
+                      {activeLink === index && (
+                        <motion.div
+                          className="absolute left-0 bottom-0 w-16 h-1 bg-cyan-500"
+                          layoutId="mobileNavIndicator"
+                        />
+                      )}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Scroll to Top Button */}
+      <Link
+        onClick={() => setActiveLink(0)}
+        to="nav"
+        duration={700}
+        smooth={true}
+        className="fixed right-6 bottom-6 z-40"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.1 }}
+          className="p-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full shadow-lg shadow-cyan-500/30 flex items-center justify-center animate-bounce duration-200 ease-in-out cursor-pointer transition-all"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <FaArrowUp className="text-xl" />
+        </motion.div>
+      </Link>
+    </>
+  );
 }
 
 export default Navbar;

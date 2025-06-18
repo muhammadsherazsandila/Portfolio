@@ -1,154 +1,206 @@
-import React, { useRef } from "react";
-import { useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Typed from "typed.js";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6";
-import styles from "./Button.module.css";
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaFacebook,
+  FaWhatsapp,
+  FaArrowDown,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
-import { translater, translaterUpDown } from "./Animation";
+import { translater } from "./Animation";
 
 function Hero() {
   const typedRef = useRef(null);
+  const [typed, setTyped] = useState(null);
+
   useEffect(() => {
-    const typed = new Typed(typedRef.current, {
+    const typedInstance = new Typed(typedRef.current, {
       strings: [
-        "Front-end Developer!",
-        "Backed-end Developer!",
-        "Full Stack Developer!",
+        "Front-end Developer",
+        "Backend Developer",
+        "Full Stack Developer",
       ],
-      typeSpeed: 120,
-      backSpeed: 100,
+      typeSpeed: 60,
+      backSpeed: 40,
       loop: true,
+      backDelay: 1500,
+      smartBackspace: true,
+      showCursor: true,
+      cursorChar: "|",
     });
 
-    return () => {
-      typed.destroy();
-    };
+    setTyped(typedInstance);
+    return () => typedInstance.destroy();
   }, []);
 
   const downloadCV = () => {
-    const a = document.createElement("a");
-    a.href = "cv.pdf";
-    a.download = "cv.pdf";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const link = document.createElement("a");
+    link.href =
+      "https://drive.google.com/uc?export=download&id=1-q5FuJd7zLGOmLuh1zPjhrP5E9HcWD1r";
+    link.setAttribute("download", "MuhammadSheraz-CV.pdf");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
-    <>
-      <div
-        className="flex flex-col items-center justify-center sm:justify-between sm:flex-row md:justify-between md:flex-row md:ml-0 lg:justify-between lg:ml-0 lg:flex-row w-full h-max md:px-24 lg:px-24 py-4 mt-7 md:mt-0 lg:mt-0"
-        id="home"
-      >
+    <section
+      id="home"
+      className="min-h-screen flex items-center px-6 md:px-12 lg:px-24 py-24 bg-gradient-to-br from-gray-900 to-gray-950"
+    >
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Left Text Section */}
         <motion.div
           variants={translater(-100)}
           initial="hidden"
           whileInView="visible"
-          className="w-full ml-9 flex gap-6 flex-col sm:w-1/2 sm:ml-0 md:ml-0 lg:ml-0  md:w-1/2 lg:w-1/2"
+          className="order-2 lg:order-1 text-center lg:text-left"
         >
           <motion.div
-            variants={translaterUpDown(0.5, -100, 0.4)}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="mb-8"
           >
-            <h1 className="font-bold text-xl sm:text-3xl md:text-4xl lg:text-4xl">
-              Hi, I'm Muhammad Sheraz
+            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-4">
+              Hi, I'm <span className="text-cyan-400">Muhammad Sheraz</span>
             </h1>
-            <h1 className="font-bold text-xl sm:text-3xl md:text-3xl lg:text-3xl">
-              And I am{" "}
-              <span className=" text-[#00a3e7] font-bold" ref={typedRef}></span>
-            </h1>
+
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold flex flex-wrap justify-center lg:justify-start">
+              And I am a{" "}
+              <span
+                ref={typedRef}
+                className="ml-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500"
+              ></span>
+            </h2>
           </motion.div>
-          <motion.div
-            variants={translaterUpDown(0.4, -100, 0.3)}
-            initial="hidden"
-            whileInView="visible"
-            className=" text-gray-400 md:text-xl lg:text-xl"
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto lg:mx-0"
           >
-            <p>I am full-stack developer and freelancer</p>
-            <p>passionate about web development and technology!</p>
-          </motion.div>
+            Full-stack developer and freelancer passionate about creating
+            innovative web solutions with cutting-edge technologies.
+          </motion.p>
+
           <motion.div
-            variants={translaterUpDown(0.3, -300, 0.2)}
-            initial="hidden"
-            whileInView="visible"
-            className=" flex gap-6 items-center font-bold flex-wrap"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-wrap justify-center lg:justify-start gap-4 mb-12"
           >
-            <a
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="https://www.fiverr.com/muhammasdsheraz/"
-              target="blank"
-              className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-[#00a3e7] text-black hover:bg-transparent hover:text-[#00a3e7] hover:border-[1px] hover:border-[#00a3e7] transition-all duration-300 relative`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-full shadow-lg hover:shadow-cyan-500/50 transition-all"
             >
-              Hire me
-            </a>
-            <a
+              Hire Me
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href="https://wa.me/+923260468787"
-              target="blank"
-              className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-transparent text-[#00a3e7] relative ${styles.button1} z-10`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-bold rounded-full hover:bg-cyan-500 hover:text-white transition-all"
             >
               Let's Talk
-            </a>
+            </motion.a>
 
-            <a
-              className={`px-3 py-2 w-32 text-center cursor-pointer rounded outline-none bg-[#00a3e7] text-black hover:bg-transparent hover:text-[#00a3e7] hover:border-[1px] hover:border-[#00a3e7] transition-all duration-300 relative`}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={downloadCV}
+              className="px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 text-white font-bold rounded-full hover:shadow-cyan-500/20 transition-all flex items-center gap-2"
             >
               Download CV
-            </a>
+            </motion.button>
           </motion.div>
+
           <motion.div
-            variants={translaterUpDown(0.2, -400, 0.1)}
-            initial="hidden"
-            whileInView="visible"
-            className=" flex items-start gap-5 mt-5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="flex justify-center lg:justify-start gap-6"
           >
-            <a
-              href="https://github.com/muhammadsherazsandila"
-              target="blank"
-              className=" text-[#00a3e7] text-4xl shadow-[0px_0px_10px_1px_#00a3e7] hover:shadow-[0px_0px_10px_3px_#00a3e7] hover:scale-105 transition-all duration-500  rounded-full"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/muhammad-sheraz-800948347/"
-              target="blank"
-              className=" text-[#00a3e7] text-4xl shadow-[0px_0px_10px_1px_#00a3e7] hover:shadow-[0px_0px_10px_3px_#00a3e7] hover:scale-105 transition-all duration-500 rounded-full"
-            >
-              <FaLinkedinIn />
-            </a>
-            <a
-              href="https://www.facebook.com/muhammadsheraz046"
-              target="blank"
-              className=" text-[#00a3e7] text-4xl shadow-[0px_0px_10px_1px_#00a3e7] hover:shadow-[0px_0px_10px_3px_#00a3e7] hover:scale-105 transition-all duration-500 rounded-full"
-            >
-              <FaFacebook />
-            </a>
-            <a
-              href="https://wa.me/+923260468787"
-              target="blank"
-              className=" text-[#00a3e7] text-4xl shadow-[0px_0px_10px_1px_#00a3e7] hover:shadow-[0px_0px_10px_3px_#00a3e7] hover:scale-105 transition-all duration-500 rounded-full"
-            >
-              <FaWhatsapp />
-            </a>
+            {[
+              {
+                icon: <FaGithub />,
+                url: "https://github.com/muhammadsherazsandila",
+                color: "from-gray-800 to-gray-900",
+              },
+              {
+                icon: <FaLinkedinIn />,
+                url: "https://www.linkedin.com/in/muhammad-sheraz-800948347/",
+                color: "from-blue-700 to-blue-900",
+              },
+              {
+                icon: <FaFacebook />,
+                url: "https://www.facebook.com/muhammadsheraz046",
+                color: "from-blue-600 to-blue-800",
+              },
+              {
+                icon: <FaWhatsapp />,
+                url: "https://wa.me/+923260468787",
+                color: "from-green-600 to-green-800",
+              },
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -8, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className={`text-2xl p-4 rounded-full bg-gradient-to-br ${social.color} backdrop-blur-sm border border-white/10 shadow-lg hover:shadow-xl transition-all`}
+              >
+                {social.icon}
+              </motion.a>
+            ))}
           </motion.div>
         </motion.div>
+
+        {/* Right Image Section */}
         <motion.div
           variants={translater(100)}
           initial="hidden"
           whileInView="visible"
-          className="w-full md:w-1/2 sm:w-1/2 lg:w-1/2 "
+          className="order-1 lg:order-2 relative flex justify-center"
         >
-          <img
-            className=" bg-transparent w-full opacity-50 rounded-full drop-shadow-[0px_0px_12px_#00a3e7]"
-            src="/Images/admin.png"
-            alt="Admin"
-          />
+          <div className="relative">
+            {/* Glowing background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+
+            {/* Main image */}
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl z-10">
+              <img
+                src="/Images/admin.png"
+                alt="Muhammad Sheraz"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="text-cyan-400 text-xl"
+            >
+              <FaArrowDown />
+            </motion.div>
+            <span className="text-gray-400 text-sm mt-2">Scroll Down</span>
+          </div>
         </motion.div>
       </div>
-    </>
+    </section>
   );
 }
 
