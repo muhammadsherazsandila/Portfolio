@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import { translater, translaterUpDown } from "./Animation";
 
 const projects = [
   {
@@ -106,7 +107,7 @@ function Projects() {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
+          variants={translaterUpDown(0, 100, 0)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
