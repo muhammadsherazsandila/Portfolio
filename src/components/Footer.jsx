@@ -94,7 +94,7 @@ function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
             <ul className="space-y-2 text-gray-400">
               <li>Islamabad, Pakistan</li>
-              <li>muhammadsherazsandila@gmail.com</li>
+              <li>msd.sheraz046@gmail.com</li>
               <li>+92 326 0468787</li>
             </ul>
           </div>
