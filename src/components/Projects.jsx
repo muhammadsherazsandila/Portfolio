@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import { translater, translaterUpDown } from "./Animation";
+import { pre } from "framer-motion/client";
 
 const projects = [
   {
@@ -21,16 +22,15 @@ const projects = [
     imgUrl: "/Images/blogora.png",
     siteUrl: "https://blogorablogs.vercel.app/",
     githubUrl: "https://github.com/muhammadsherazsandila/Bloging-website",
-    tags: ["MERN Stack", "CMS", "Authentication"],
+    tags: ["MERN", "CMS", "Authentication"],
   },
   {
     title: "Roomify",
-    description:
-      "Real-time chat application with typing indicators and smart reply interactions",
+    description: "Real-time chat application with user authentication",
     imgUrl: "/Images/roomify.png",
     siteUrl: "https://roomifychat.vercel.app/",
     githubUrl: "https://github.com/muhammadsherazsandila/Chat-room", // change if actual URL differs
-    tags: ["MERN Stack", "Socket.IO", "Real-time"],
+    tags: ["MERN", "Socket.IO", "Real-time"],
   },
   {
     title: "Weather App",
@@ -47,7 +47,7 @@ const projects = [
     imgUrl: "/Images/sandilaDigix.png",
     siteUrl: "https://sandiladigix.netlify.app/",
     githubUrl: "https://github.com/muhammadsherazsandila/SandilaDigix",
-    tags: ["React", "Tailwind", "Framer Motion"],
+    tags: ["React", "Tailwind", "Framer"],
   },
   {
     title: "Future Programmers",
@@ -83,6 +83,7 @@ const itemVariants = {
 
 function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [hoverActive, setHoverActive] = useState("opacity-0");
 
   return (
     <section
@@ -158,7 +159,18 @@ function Projects() {
                     />
                   </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-b from-black/90 to-transparent opacity-0 ${
+                      activeIndex === index ? hoverActive : "opacity-0"
+                    } transition-opacity duration-500 flex flex-col justify-end p-6 `}
+                    onMouseEnter={() => setHoverActive("opacity-100")}
+                    onMouseLeave={() => setHoverActive("opacity-0")}
+                    onClick={() =>
+                      setHoverActive((prev) =>
+                        prev === "opacity-100" ? "opacity-0" : "opacity-100"
+                      )
+                    }
+                  >
                     <h3 className="text-2xl font-bold text-white">
                       {project.title}
                     </h3>
