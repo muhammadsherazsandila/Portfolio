@@ -17,9 +17,9 @@ function Hero() {
   useEffect(() => {
     const typedInstance = new Typed(typedRef.current, {
       strings: [
-        "Front-end Developer",
-        "Backend Developer",
-        "Full Stack Developer",
+        "Front-end Developer.",
+        "Backend Developer.",
+        "Full Stack Developer.",
       ],
       typeSpeed: 60,
       backSpeed: 40,
@@ -196,7 +196,10 @@ function Hero() {
             >
               <FaArrowDown />
             </motion.div>
-            <span className="text-gray-400 text-sm mt-2">Scroll Down</span>
+            {/* Scroll down text making the text clip by adding background */}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-600 via-cyan-500 to-blue-500 text-sm mt-2 font-semibold ">
+              Scroll Down
+            </span>
           </div>
         </motion.div>
       </div>

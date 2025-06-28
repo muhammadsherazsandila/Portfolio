@@ -16,6 +16,23 @@ import { translater, translaterUpDown } from "./Animation";
 
 const projects = [
   {
+    title: "Blogora",
+    description: "Modern blogging platform with rich content editing",
+    imgUrl: "/Images/blogora.png",
+    siteUrl: "https://blogorablogs.vercel.app/",
+    githubUrl: "https://github.com/muhammadsherazsandila/Bloging-website",
+    tags: ["MERN Stack", "CMS", "Authentication"],
+  },
+  {
+    title: "Roomify",
+    description:
+      "Real-time chat application with typing indicators and smart reply interactions",
+    imgUrl: "/Images/roomify.png",
+    siteUrl: "https://roomifychat.vercel.app/",
+    githubUrl: "https://github.com/muhammadsherazsandila/Chat-room", // change if actual URL differs
+    tags: ["MERN Stack", "Socket.IO", "Real-time"],
+  },
+  {
     title: "Weather App",
     description:
       "Real-time weather forecasting application with location detection",
@@ -38,23 +55,7 @@ const projects = [
     imgUrl: "/Images/futureProgrammers.png",
     siteUrl: "https://future-programmers.vercel.app/",
     githubUrl: "https://github.com/muhammadsherazsandila/Future-Programmers",
-    tags: ["Next.js", "Firebase", "UI/UX"],
-  },
-  {
-    title: "Unit Converter",
-    description: "Tool for converting between measurement units",
-    imgUrl: "/Images/unitConverter.png",
-    siteUrl: "https://units-converter-react.vercel.app/",
-    githubUrl: "https://github.com/muhammadsherazsandila/Units-Converter-React",
-    tags: ["React", "Calculations", "Responsive"],
-  },
-  {
-    title: "Blogora",
-    description: "Modern blogging platform with rich content editing",
-    imgUrl: "/Images/blogora.png",
-    siteUrl: "https://blogorablogs.vercel.app/",
-    githubUrl: "https://github.com/muhammadsherazsandila/Bloging-website",
-    tags: ["MERN Stack", "CMS", "Authentication"],
+    tags: ["EJS", "MongoDB", "UI/UX"],
   },
 ];
 
@@ -157,7 +158,7 @@ function Projects() {
                     />
                   </div>
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <h3 className="text-2xl font-bold text-white">
                       {project.title}
                     </h3>
@@ -167,7 +168,7 @@ function Projects() {
                       {project.tags.map((tag, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 bg-blue-900/30 text-blue-300 text-sm rounded-full"
+                          className="px-3 py-1 bg-gray-800  text-sm rounded-full"
                         >
                           {tag}
                         </span>
@@ -179,7 +180,7 @@ function Projects() {
                         href={project.siteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg text-white transition-colors"
                       >
                         <FaExternalLinkAlt /> Live Demo
                       </a>
