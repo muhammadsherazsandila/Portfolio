@@ -33,13 +33,13 @@ const projects = [
     tags: ["MERN", "Socket.IO", "Real-time"],
   },
   {
-    title: "Weather App",
+    title: "Trendora",
     description:
-      "Real-time weather forecasting application with location detection",
-    imgUrl: "/Images/weather.png",
-    siteUrl: "https://sandilaweatherapp.vercel.app/",
-    githubUrl: "https://github.com/muhammadsherazsandila/Weather-React",
-    tags: ["React", "API", "Geolocation"],
+      "Modern e-commerce platform with a responsive UI, product cart system, and smooth user experience",
+    imgUrl: "/Images/trendora.png",
+    siteUrl: "https://trendorashop.vercel.app/",
+    githubUrl: "https://github.com/muhammadsherazsandila/Shopping-Cart-System", // update if needed
+    tags: ["E-commerce", "React", "Cart"],
   },
   {
     title: "Sandila Digix",
